@@ -17,13 +17,15 @@ def genworth():
         t = (r['legs'][0]['duration']['value'],r['summary'])
         tups.append(t)
     if min(tups)[1] != "I-64":
-        return "Genworth Traffic: Check I-64"
+        sub = "Traffic Alert: Genworth"
+        body = "I-64 is not fastest route"
+        send_email(sub, body)
     else:
-        return None
+        pass
 
-# stamp = time.strftime('%Y-%m-%d')
+def main():
+    # stamp = time.strftime('%Y-%m-%d')
+    genworth()
 
 if __name__ == "__main__":
-    traffic = genworth()
-    if traffic:
-        send_email(traffic)
+    main()

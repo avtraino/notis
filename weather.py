@@ -2,7 +2,7 @@ import requests, json, time
 from secrets import dark_key
 from notify import send_email
 
-def rain():
+def heavy_rain():
     key = dark_key
     lat, lon = '37.562', '-77.479'
     options = '?units=si&exclude=hourly,minutely'
@@ -13,11 +13,15 @@ def rain():
     pim = block['daily']['data'][0]['precipIntensityMax']
     summ = block['daily']['data'][0]['summary']
     if pim > 5:
-        rain = "Weather Alert: Possible heavy rain today"
-        send_email(rain, summ)
+        sub = "Weather Alert: Possible heavy rain today"
+        body = "Forecast: " + summ
+        send_email(sub, body)
     else:
         pass
 
+def main():
+    heavy_rain()
+
 if __name__ == "__main__":
-    rain()
+    main()
     
