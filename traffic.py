@@ -5,10 +5,9 @@ from notify import send_email
 def genworth():
     api = 'https://maps.googleapis.com/maps/api/directions/json?'
     nodes = 'origin=Park+and+Tilden+Richmond+VA&destination=Genworth+Richmond'
-    depart = "&departure_time=now"
-    alts = "&alternatives=true"
+    options = "&departure_time=now&alternatives=true"
     key = '&key='+ secrets.maps_key
-    link = api+nodes+depart+alts+key
+    link = api+nodes+options+key
     # print(link)
     res = requests.get(link)
     routes = res.json()['routes']
