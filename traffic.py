@@ -29,6 +29,7 @@ def genworth():
         print("Notis sent")
     else:
         print("No traffic, 195/64 is best route")
+        send_email("Traffic", "still working")
 
 def main():
     # stamp = time.strftime('%Y-%m-%d')

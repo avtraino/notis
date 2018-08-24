@@ -17,7 +17,8 @@ def heavy_rain():
         body = "Forecast: " + summ
         send_email(sub, body)
     else:
-        pass
+        send_email("Weather", "still working")
+        print("weather is fine")
 
 def main():
     heavy_rain()
