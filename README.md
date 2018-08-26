@@ -2,8 +2,8 @@
 
 ## A few scripts that work together to provide the following functionality:
 
-* Email me in the morning if the weather might get wild today
 * Email me in the morning if traffic is bad on my usual route to work
+* Email me in the morning if the weather might get wild today
 
 ## Requirements:
 
