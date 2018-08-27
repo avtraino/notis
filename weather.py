@@ -17,7 +17,7 @@ def heavy_rain():
     block = res.json()
     pim = block['daily']['data'][0]['precipIntensityMax']
     summ = block['daily']['data'][0]['summary']
-    if pim > 5:
+    if pim > 3:
         sub = "Weather Alert: Possible heavy rain today"
         body = "Forecast: " + summ
         send_email(sub, body)
