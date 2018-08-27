@@ -1,12 +1,16 @@
-import requests, json, time
+import requests, json
+import logging
 import secrets
 from notify import send_email
 
+logging.basicConfig(filename=secrets.logfile, level=logging.DEBUG, 
+                    format="%(asctime)s - %(levelname)s - %(message)s", datefmt="%Y-%m-%d %H:%M:%S")
+
 def genworth():
+    key = '&key='+ secrets.maps_key
     api = 'https://maps.googleapis.com/maps/api/directions/json?'
     nodes = 'origin=Park+and+Tilden+Richmond+VA&destination=Genworth+Richmond'
     options = "&departure_time=now&alternatives=true"
-    key = '&key='+ secrets.maps_key
     link = api+nodes+options+key
     # print(link)
     res = requests.get(link)
@@ -26,14 +30,17 @@ def genworth():
         sub = "Traffic Alert: Genworth"
         body = "I-64 is not the fastest route"
         send_email(sub, body)
-        print("Notis sent")
+        print("Traffic notis sent")
+        logging.info("Email sent: YES")
     else:
         print("No traffic, 195/64 is best route")
-        send_email("Traffic", "still working")
-
+        logging.info("Email sent: NO")
+        
 def main():
-    # stamp = time.strftime('%Y-%m-%d')
-    genworth()
+    try:
+        genworth()
+    except:
+        logging.exception("traffic() function did not run properly")
 
 if __name__ == "__main__":
     main()
