@@ -3,7 +3,7 @@ import logging
 import secrets
 from notify import send_email
 
-logging.basicConfig(filename=secrets.logfile, level=logging.DEBUG, 
+logging.basicConfig(filename=secrets.logfile, level=logging.INFO, 
                     format="%(asctime)s - TRAFFIC - %(levelname)s - %(message)s",
                     datefmt="%Y-%m-%d %H:%M:%S")
 
