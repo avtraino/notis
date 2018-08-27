@@ -4,7 +4,8 @@ import secrets
 from notify import send_email
 
 logging.basicConfig(filename=secrets.logfile, level=logging.DEBUG, 
-                    format="%(asctime)s - %(levelname)s - %(message)s", datefmt="%Y-%m-%d %H:%M:%S")
+                    format="%(asctime)s - TRAFFIC - %(levelname)s - %(message)s",
+                    datefmt="%Y-%m-%d %H:%M:%S")
 
 def genworth():
     key = '&key='+ secrets.maps_key
@@ -30,10 +31,8 @@ def genworth():
         sub = "Traffic Alert: Genworth"
         body = "I-64 is not the fastest route"
         send_email(sub, body)
-        print("Traffic notis sent")
         logging.info("Email sent: YES")
     else:
-        print("No traffic, 195/64 is best route")
         logging.info("Email sent: NO")
         
 def main():

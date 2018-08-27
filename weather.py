@@ -4,7 +4,8 @@ import secrets
 from notify import send_email
 
 logging.basicConfig(filename=secrets.logfile, level=logging.DEBUG, 
-                    format="%(asctime)s - %(levelname)s - %(message)s", datefmt="%Y-%m-%d %H:%M:%S")
+                    format="%(asctime)s - WEATHER - %(levelname)s - %(message)s", 
+                    datefmt="%Y-%m-%d %H:%M:%S")
 
 def heavy_rain():
     key = secrets.dark_key
@@ -20,10 +21,8 @@ def heavy_rain():
         sub = "Weather Alert: Possible heavy rain today"
         body = "Forecast: " + summ
         send_email(sub, body)
-        print("Weather notis sent")
         logging.info("Email sent: YES")
     else:
-        print("weather is fine")
         logging.info("Email sent: NO")
 
 def main():
