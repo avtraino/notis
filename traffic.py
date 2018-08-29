@@ -18,12 +18,13 @@ def genworth():
     routes = res.json()['routes']
     tups = []
     for r in routes:
-        duration = r['legs'][0]['duration']['value']
+        duration = r['legs'][0]['duration_in_traffic']['value']
         steps = []
         for step in r['legs'][0]['steps']:
             steps.append(step['html_instructions'])
         tup = (duration,steps)
         tups.append(tup)
+    print(tups)
     best_route = min(tups)[1]
     traffic = not all(any(s in step for step in best_route) for s in ['I-195 N', '183B'])
 
