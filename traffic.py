@@ -32,9 +32,9 @@ def genworth():
         sub = "Traffic Alert: Genworth"
         body = "I-64 is not the fastest route"
         send_email(sub, body)
-        logging.info("Email sent: YES")
+        logging.info("Trigger email: YES")
     else:
-        logging.info("Email sent: NO")
+        logging.info("Trigger email: NO")
         
 def main():
     try:

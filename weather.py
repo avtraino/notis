@@ -21,9 +21,9 @@ def heavy_rain():
         sub = "Weather Alert: Possible heavy rain today"
         body = "Forecast: " + summ
         send_email(sub, body)
-        logging.info("Email sent: YES")
+        logging.info("Trigger email: YES")
     else:
-        logging.info("Email sent: NO")
+        logging.info("Trigger email: NO")
 
 def main():
     try:
