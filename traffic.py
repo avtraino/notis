@@ -8,10 +8,10 @@ logging.basicConfig(filename=secrets.logfile, level=logging.INFO,
                     datefmt="%Y-%m-%d %H:%M:%S")
 
 def genworth():
-    key = '&key='+ secrets.maps_key
     api = 'https://maps.googleapis.com/maps/api/directions/json?'
-    nodes = 'origin=Park+and+Tilden+Richmond+VA&destination=Genworth+Richmond'
+    nodes = secrets.point_a + '&' + secrets.point_b
     options = "&departure_time=now&alternatives=true"
+    key = '&key='+ secrets.maps_key
     link = api+nodes+options+key
     # print(link)
     res = requests.get(link)

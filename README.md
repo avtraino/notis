@@ -9,13 +9,15 @@
 
 ### secrets.py
 ```
-noti_from = "from-email-address"
-
-noti_pass = "from-email-password"
-
-noti_to = "to-email-address"
+noti_from = 'from-email-address'
+noti_pass = 'from-email-password'
+noti_to = 'to-email-address'
 
 dark_key = 'dark-sky-api-key'
 
 maps_key = 'google-directions-api-key'
+point_a = 'origin=123+Main+Street+Chicago+IL'
+point_a = 'destination=Empire+State+Building'
+
+logfile = '/var/log/app'
 ```
