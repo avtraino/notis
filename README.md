@@ -16,8 +16,8 @@ noti_to = 'to-email-address'
 dark_key = 'dark-sky-api-key'
 
 maps_key = 'google-directions-api-key'
-point_a = 'origin=123+Main+Street+Chicago+IL'
-point_a = 'destination=Empire+State+Building'
+point_a = 'origin=Joliet+Correctional+Center'
+point_b = 'destination=1060+W+Addison+St+Chicago+IL'
 
 logfile = '/var/log/app'
 ```
