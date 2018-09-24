@@ -20,41 +20,19 @@ def top_rated():
         data = json.load(brew)
         recent = data['recent']
         beer_list = data['beer_list']
-
-    # get my new beers
-    key = secrets.untappd_token
-    endpoint = "https://api.untappd.com/v4/user/beers?limit=50&access_token="
-    link = endpoint + key 
-    res = requests.get(link)
-    # output = res.text
-    # print(output)
-    block = res.json()
-    items = block['response']['beers']['items']
-    current_bids = [i['bid'] for i in beer_list]
-
-    for i in items:
-        beer = i['beer']['beer_name']
-        bid = str(i['beer']['bid'])
-        new_beer = {"bid":bid, "name":beer}
-        if new_beer['bid'] not in current_bids:
-            beer_list.append(new_beer)
-
     
     # get new checkins
     key = secrets.untappd_token
     endpoint = 'https://api.untappd.com/v4/checkin/recent?limit=50&min_id='+recent+'&access_token='
     link = endpoint + key 
-    print(link)
     res = requests.get(link)
-    # output = res.text
-    # print(output)
     block = res.json()
 
     # if new checkins, process
     if block['response']['checkins']['count'] > 0:
 
-        # new_recent = block['response']['checkins']['items'][0]['checkin_id']
-        # data['recent'] = str(new_recent)
+        new_recent = block['response']['checkins']['items'][0]['checkin_id']
+        data['recent'] = str(new_recent)
         
         current_bids = [i['bid'] for i in beer_list]
         checkins = block['response']['checkins']['items']
@@ -66,17 +44,19 @@ def top_rated():
             brewery = i['brewery']['brewery_name']
             rating = i['rating_score']
             if rating >= 4.5:
-                print(name , "gave the", beer , "by" , brewery , str(rating) , "stars")
                 new_beer = {"bid":bid, "name":beer}
                 if new_beer['bid'] not in current_bids:
+                    print(name , "gave the", beer , "by" , brewery , str(rating) , "stars")
                     beer_list.append(new_beer)
-
-        # write new data 
-        with open(datafile, 'w') as brew:
-            json.dump(data, brew)
-
+            
+        logging.info("Beers logged. New recent: " + data['recent'])
     else:
         logging.info("no new checkins")
+
+    # write new data 
+    with open(datafile, 'w') as brew:
+        json.dump(data, brew)
+
 
 def main():
     try:
@@ -85,33 +65,9 @@ def main():
         logging.exception("top_rated() function did not run properly")
     
 def debug():
-
-    with open('temp.json', 'r') as brew:
-        data = json.load(brew)
-        beer_list = data['beer_list']
-
-    link = "https://api.untappd.com/v4/user/beers?limit=50&access_token=A118C645CEAC4508DDEE6CE587CDFDA242082E5B"
-    res = requests.get(link)
-    # output = res.text
-    # print(output)
-    block = res.json()
-    items = block['response']['beers']['items']
-    current_bids = [i['bid'] for i in beer_list]
-
-    for i in items:
-        beer = i['beer']['beer_name']
-        bid = str(i['beer']['bid'])
-        new_beer = {"bid":bid, "name":beer}
-        # print(new_beer)
-        if new_beer['bid'] not in current_bids:
-            beer_list.append(new_beer)
-
-
-
-    with open('temp.json', 'w') as brew:
-        json.dump(data, brew)
+    pass
 
 if __name__ == "__main__":
 
-    # main()
-    debug()
+    main()
+    # debug()
