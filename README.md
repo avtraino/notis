@@ -1,9 +1,10 @@
 # notis
 
-## A few scripts that work together to provide the following functionality:
+## A few scripts that work together with cron jobs to provide the following functionality:
 
 * Email me in the morning if traffic is bad on my usual route to work
 * Email me in the morning if the weather might get wild today
+* Email me Friday afternoon with any new beers my friends really enjoy
 
 ## Requirements:
 
@@ -23,5 +24,5 @@ untappd_ID = 'untappd-client-ID'
 untappd_secret = 'untappd-client-secret'
 untappd_token = 'untappd-access-token'
 
-logfile = '/var/log/app'
+logfile = ''
 ```
