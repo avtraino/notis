@@ -4,7 +4,7 @@
 
 * Email me in the morning if traffic is bad on my usual route to work
 * Email me in the morning if the weather might get wild today
-* Email me Friday afternoon with any new beers my friends really enjoy
+* Email me Friday afternoon with any new beers my friends really enjoyed in the last week
 
 ## Requirements:
 
