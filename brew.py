@@ -14,6 +14,10 @@ def top_rated():
     3. If checkin rating is high and beer isn't on beer list already, then notify and add to beer list
     """
 
+    sub = "Untappd Gems"
+    body = "Here are the new beers your friends are excited about:\n"
+    send_ready = False
+
     # open data file
     datafile = 'brew_data/top_rated.json'
     with open(datafile, 'r') as brew:
@@ -46,12 +50,19 @@ def top_rated():
             if rating >= 4.5:
                 new_beer = {"bid":bid, "name":beer}
                 if new_beer['bid'] not in current_bids:
-                    print(name , "gave the", beer , "by" , brewery , str(rating) , "stars")
+                    add = "\n - " + name + " gave " + str(rating) + " stars to the "  + beer + " by " + brewery
+                    body = body + add
                     beer_list.append(new_beer)
-            
-        logging.info("Beers logged. New recent: " + data['recent'])
+                    send_ready = True
+        
+        if send_ready == True:
+            send_email(sub, body)  
+            logging.info("Beers email sent. New recent: " + data['recent'])
+        else:
+            logging.info("New checkins. Nothing premium.")
+        
     else:
-        logging.info("no new checkins")
+        logging.info("No new checkins")
 
     # write new data 
     with open(datafile, 'w') as brew:
@@ -63,6 +74,7 @@ def main():
         top_rated()
     except:
         logging.exception("top_rated() function did not run properly")
+        send_email("Check the Notis logs, top_rated() didn't run properly")
     
 def debug():
     pass
