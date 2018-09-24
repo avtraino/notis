@@ -1,11 +1,16 @@
 import requests, json
-import logging
+import logging, os
 import secrets
 from notify import send_email
 
 logging.basicConfig(filename=secrets.logfile, level=logging.INFO, 
                     format="%(asctime)s - BREW - %(levelname)s - %(message)s", 
                     datefmt="%Y-%m-%d %H:%M:%S")
+
+abspath = os.path.abspath(__file__)
+proj_dir = os.path.dirname(abspath)
+os.chdir(proj_dir)
+
 
 def top_rated():
     """
