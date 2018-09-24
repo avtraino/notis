@@ -1,5 +1,6 @@
 run.sh
 secrets.py
+/data/
 
 # Annoying
 .DS_Store

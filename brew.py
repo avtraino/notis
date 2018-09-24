@@ -19,7 +19,7 @@ def top_rated():
     send_ready = False
 
     # open data file
-    datafile = 'brew_data/top_rated.json'
+    datafile = 'data/top_rated.json'
     with open(datafile, 'r') as brew:
         data = json.load(brew)
         recent = data['recent']
