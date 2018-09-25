@@ -11,7 +11,6 @@ abspath = os.path.abspath(__file__)
 proj_dir = os.path.dirname(abspath)
 os.chdir(proj_dir)
 
-
 def top_rated():
     """
     1. Get list of recent beers I've had, add new ones to beer list in JSON 
@@ -52,13 +51,14 @@ def top_rated():
             bid = str(i['beer']['bid'])
             brewery = i['brewery']['brewery_name']
             rating = i['rating_score']
-            if rating >= 4.5:
-                new_beer = {"bid":bid, "name":beer}
-                if new_beer['bid'] not in current_bids:
-                    add = "\n - " + name + " gave " + str(rating) + " stars to the "  + beer + " by " + brewery
-                    body = body + add
-                    beer_list.append(new_beer)
-                    send_ready = True
+            if name not in [secrets.bad_taste]:
+                if rating >= 4.5:
+                    new_beer = {"bid":bid, "name":beer}
+                    if new_beer['bid'] not in current_bids:
+                        add = "\n - " + name + " gave " + str(rating) + " stars to the "  + beer + " by " + brewery
+                        body = body + add
+                        beer_list.append(new_beer)
+                        send_ready = True
         
         if send_ready == True:
             send_email(sub, body)  
