@@ -13,7 +13,6 @@ def genworth():
     options = "&departure_time=now&alternatives=true"
     key = '&key='+ secrets.maps_key
     link = api+nodes+options+key
-    # print(link)
     res = requests.get(link)
     routes = res.json()['routes']
     tups = []
@@ -24,7 +23,6 @@ def genworth():
             steps.append(step['html_instructions'])
         tup = (duration,steps)
         tups.append(tup)
-    print(tups)
     best_route = min(tups)[1]
     traffic = not all(any(s in step for step in best_route) for s in ['I-195 N', '183B'])
 

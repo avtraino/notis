@@ -12,7 +12,6 @@ def heavy_rain():
     lat, lon = '37.562', '-77.479'
     options = '?units=si&exclude=hourly,minutely'
     link = "https://api.darksky.net/forecast/"+key+"/"+lat+","+lon+options
-    # print(link)
     res = requests.get(link)
     block = res.json()
     pim = block['daily']['data'][0]['precipIntensityMax']
