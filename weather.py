@@ -29,6 +29,7 @@ def main():
         heavy_rain()
     except:
         logging.exception("heavy_rain() function did not run properly")
+        send_email("Notis logs: weather() didn't run properly")
 
 if __name__ == "__main__":
     main()

@@ -39,6 +39,7 @@ def main():
         genworth()
     except:
         logging.exception("traffic() function did not run properly")
+        send_email("Notis logs: genworth() didn't run properly")
 
 if __name__ == "__main__":
     main()

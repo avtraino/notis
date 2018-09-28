@@ -79,7 +79,7 @@ def main():
         top_rated()
     except:
         logging.exception("top_rated() function did not run properly")
-        send_email("Check the Notis logs, top_rated() didn't run properly")
+        send_email("Notis logs: top_rated() didn't run properly")
     
 def debug():
     pass
