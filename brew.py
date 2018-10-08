@@ -51,7 +51,7 @@ def top_rated():
             bid = str(i['beer']['bid'])
             brewery = i['brewery']['brewery_name']
             rating = i['rating_score']
-            if name not in [secrets.bad_taste]:
+            if name not in secrets.bad_taste:
                 if rating >= 4.5:
                     new_beer = {"bid":bid, "name":beer}
                     if new_beer['bid'] not in current_bids:
