@@ -4,6 +4,7 @@
 
 * Email me in the morning if traffic is bad on my usual route to work
 * Email me in the morning if the weather might get wild today
+* Email me in the evening if traffic is bad on my usual route home
 * Email me Friday afternoon with any new beers my friends really enjoyed in the last week
 
 ## Requirements:
@@ -17,8 +18,8 @@ noti_to = 'to-email-address'
 dark_key = 'dark-sky-api-key'
 
 maps_key = 'google-directions-api-key'
-point_a = 'origin=Joliet+Correctional+Center'
-point_b = 'destination=1060+W+Addison+St+Chicago+IL'
+point_a = 'Joliet+Correctional+Center'
+point_b = '1060+W+Addison+St+Chicago+IL'
 
 untappd_ID = 'untappd-client-ID'
 untappd_secret = 'untappd-client-secret'
