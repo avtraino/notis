@@ -38,7 +38,7 @@ def main():
     try:
         commute()
     except:
-        logging.exception("traffic() function did not run properly")
+        logging.exception("commute() function did not run properly")
         send_email("Notis logs: commute() didn't run properly")
 
 if __name__ == "__main__":
