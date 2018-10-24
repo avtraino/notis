@@ -18,7 +18,7 @@ def top_rated():
     3. If checkin rating is high and beer isn't on beer list already, then notify and add to beer list
     """
 
-    sub = "Untappd Gems"
+    subject = "Untappd Gems"
     body = "Here are the new beers your friends are excited about:\n"
     send_ready = False
 
@@ -61,7 +61,7 @@ def top_rated():
                         send_ready = True
         
         if send_ready == True:
-            send_email(sub, body)  
+            send_email(subject, body)  
             logging.info("Beers email sent. New recent: " + data['recent'])
         else:
             logging.info("New checkins. Nothing premium.")

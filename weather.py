@@ -12,14 +12,16 @@ def heavy_rain():
     lat, lon = '37.562', '-77.479'
     options = '?units=si&exclude=hourly,minutely'
     link = "https://api.darksky.net/forecast/"+key+"/"+lat+","+lon+options
+
     res = requests.get(link)
     block = res.json()
     pim = block['daily']['data'][0]['precipIntensityMax']
     summ = block['daily']['data'][0]['summary']
+
     if pim > 3:
-        sub = "Weather Alert: Possible heavy rain today"
+        subject = "Weather Alert: Possible heavy rain today"
         body = "Forecast: " + summ
-        send_email(sub, body)
+        send_email(subject, body)
         logging.info("Trigger email: YES")
     else:
         logging.info("Trigger email: NO")
