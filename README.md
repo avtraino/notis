@@ -2,10 +2,10 @@
 
 ## A few scripts that work together with cron jobs to provide the following functionality:
 
-* Email me in the morning if traffic is bad on my usual route to work
-* Email me in the morning if the weather might get wild today
-* Email me in the evening if traffic is bad on my usual route home
-* Email me Friday afternoon with any new beers my friends really enjoyed in the last week
+* Notify me in the morning if traffic is bad on my usual route to work
+* Notify me in the morning if the weather might get wild today
+* Notify me in the evening if traffic is bad on my usual route home
+* Notify me Friday afternoon with any new beers my friends really enjoyed in the last week
 
 ## Requirements:
 
