@@ -58,6 +58,7 @@ def top_rated():
                         add = "\n - " + name + " gave " + str(rating) + " stars to the "  + beer + " by " + brewery
                         body = body + add
                         beer_list.append(new_beer)
+                        current_bids.append(new_beer['bid'])
                         send_ready = True
         
         if send_ready == True:
