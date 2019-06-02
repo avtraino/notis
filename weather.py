@@ -19,7 +19,7 @@ def heavy_rain():
     summ = block['daily']['data'][0]['summary']
 
     if pim > 3:
-        subject = "Weather Alert: Possible heavy rain today"
+        subject = "Weather Alert: Heavy rain today"
         body = "Forecast: " + summ
         send_email(subject, body)
         logging.info("Trigger email: YES")
