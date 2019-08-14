@@ -3,16 +3,17 @@ import logging, os
 import secrets
 from notify import send_email
 
-conn = sqlite3.connect('data/notis.db')
-conn.row_factory = sqlite3.Row
 
 logging.basicConfig(filename=secrets.logfile, level=logging.INFO, 
-                    format="%(asctime)s - BREW - %(levelname)s - %(message)s", 
-                    datefmt="%Y-%m-%d %H:%M:%S")
+format="%(asctime)s - BREW - %(levelname)s - %(message)s", 
+datefmt="%Y-%m-%d %H:%M:%S")
 
 abspath = os.path.abspath(__file__)
 proj_dir = os.path.dirname(abspath)
 os.chdir(proj_dir)
+
+conn = sqlite3.connect('data/notis.db')
+conn.row_factory = sqlite3.Row
 
 def top_rated():
     """
