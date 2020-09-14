@@ -1,4 +1,4 @@
-import requests, json, sqlite3
+import httpx, json, sqlite3
 import logging, os
 import secrets
 from notify import send_email
@@ -32,7 +32,7 @@ def top_rated():
 
     # get new checkins
     endpoint = f'https://api.untappd.com/v4/checkin/recent?limit=50&min_id={old_recent}&access_token={secrets.untappd_token}'
-    res = requests.get(endpoint)
+    res = httpx.get(endpoint)
     block = res.json()
 
     # if new checkins, process

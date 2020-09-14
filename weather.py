@@ -1,4 +1,4 @@
-import requests, json
+import httpx, json
 import logging
 import secrets
 from notify import send_email
@@ -13,7 +13,7 @@ def heavy_rain():
     options = '?units=si&exclude=hourly,minutely'
     link = "https://api.darksky.net/forecast/"+key+"/"+lat+","+lon+options
 
-    res = requests.get(link)
+    res = httpx.get(link)
     block = res.json()
     pim = block['daily']['data'][0]['precipIntensityMax']
     summ = block['daily']['data'][0]['summary']

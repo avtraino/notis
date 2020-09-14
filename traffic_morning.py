@@ -1,4 +1,4 @@
-import requests, json
+import httpx, json
 import logging
 import secrets
 from notify import send_email
@@ -14,7 +14,7 @@ def commute():
     key = '&key='+ secrets.maps_key
     link = api+nodes+options+key
 
-    res = requests.get(link)
+    res = httpx.get(link)
     routes = res.json()['routes']
     tups = []
 
