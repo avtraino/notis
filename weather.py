@@ -1,3 +1,4 @@
+from datetime import datetime, timedelta, timezone
 import httpx, json
 import logging
 import secrets
@@ -7,20 +8,36 @@ logging.basicConfig(filename=secrets.logfile, level=logging.INFO,
                     format="%(asctime)s - WEATHER - %(levelname)s - %(message)s", 
                     datefmt="%Y-%m-%d %H:%M:%S")
 
+next_nine_hours = ( datetime.utcnow() + timedelta(hours=9) ).strftime('%Y-%m-%dT%H:%M:%SZ')
+bad_codes = ["rain_heavy", "snow_heavy", "freezing_rain_heavy", "tstorm"]
+    
 def heavy_rain():
-    key = secrets.dark_key
-    lat, lon = '37.562', '-77.479'
-    options = '?units=si&exclude=hourly,minutely'
-    link = "https://api.darksky.net/forecast/"+key+"/"+lat+","+lon+options
+    url = "https://api.climacell.co/v3/weather/forecast/hourly"
+    querystring = {   # defaults: unit_system = si
+        "lat" : '37.557', "lon" : '-77.475', 
+        "start_time" : "now", "end_time" : next_nine_hours, 
+        "fields" : "precipitation,weather_code,precipitation_probability",
+        "apikey" : secrets.clima_key}
 
-    res = httpx.get(link)
+    res = httpx.get(url, params=querystring)
     block = res.json()
-    pim = block['daily']['data'][0]['precipIntensityMax']
-    summ = block['daily']['data'][0]['summary']
 
-    if pim > 3:
-        subject = "Weather Alert: Heavy rain today"
-        body = "Forecast: " + summ
+    bad_hours, bad_hour_count = "", 0
+    for hour in block:
+        utc_string = hour['observation_time']['value']
+        probability = hour['precipitation_probability']['value']
+        code = hour['weather_code']['value']
+        precip = round(hour['precipitation']['value'],1)
+        if (probability >= 25) and (code in bad_codes): 
+            local_stamp = datetime.strptime(utc_string, '%Y-%m-%dT%H:%M:%S.000Z').replace(tzinfo=timezone.utc).astimezone(tz=None)
+            nice_time = local_stamp.strftime("%I%p")
+            bad_hour_count = bad_hour_count + 1
+            bad_hours = bad_hours + f"{nice_time} -- {code} -- {precip} mm/hr -- {probability}% chance \n"
+
+
+    if bad_hour_count > 0:
+        subject = f"Weather Alert: {bad_hour_count} hours with heavy precipitation"
+        body = bad_hours
         send_email(subject, body)
         logging.info("Trigger email: YES")
     else:
