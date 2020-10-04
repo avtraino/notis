@@ -10,8 +10,7 @@ def prod_only(func):
     return wrapper
 
 @prod_only
-def send_email(subject,body=" "):
-
+def send_email(subject, body=" "):
     msg = EmailMessage()
     msg['Subject'] = subject
     msg['From'] = "Notis <"+noti_from+">"
