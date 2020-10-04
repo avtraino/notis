@@ -5,7 +5,7 @@ import secrets
 from notify import send_email
 
 
-logging.basicConfig(filename=secrets.logfile, level=logging.INFO, 
+logging.basicConfig(filename=secrets.logpath+'site_diff.log', level=logging.INFO, 
 format="%(asctime)s - SITE_DIFF - %(levelname)s - %(message)s", 
 datefmt="%Y-%m-%d %H:%M:%S")
 

@@ -4,7 +4,7 @@ import secrets
 from notify import send_email
 
 
-logging.basicConfig(filename=secrets.logfile, level=logging.INFO, 
+logging.basicConfig(filename=secrets.logpath+'brew.log', level=logging.INFO, 
 format="%(asctime)s - BREW - %(levelname)s - %(message)s", 
 datefmt="%Y-%m-%d %H:%M:%S")
 

@@ -25,5 +25,5 @@ untappd_ID = 'untappd-client-ID'
 untappd_secret = 'untappd-client-secret'
 untappd_token = 'untappd-access-token'
 
-logfile = ''
+logpath = ''
 ```

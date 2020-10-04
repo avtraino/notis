@@ -3,7 +3,7 @@ import logging
 import secrets
 from notify import send_email
 
-logging.basicConfig(filename=secrets.logfile, level=logging.INFO, 
+logging.basicConfig(filename=secrets.logpath+'traffic.log', level=logging.INFO, 
                     format="%(asctime)s - TRAFFIC - %(levelname)s - %(message)s",
                     datefmt="%Y-%m-%d %H:%M:%S")
 
@@ -34,15 +34,15 @@ def commute():
         subject = "Traffic Alert"
         body = "I-64 is not the fastest route"
         send_email(subject, body)
-        logging.info("Trigger email: YES")
+        logging.info("Morning, trigger email: YES")
     else:
-        logging.info("Trigger email: NO")
+        logging.info("Morning, trigger email: NO")
         
 def main():
     try:
         commute()
     except:
-        logging.exception("commute() function did not run properly")
+        logging.exception("Morning commute() function did not run properly")
         send_email("Notis logs: traffic_morning.py didn't run properly")
 
 if __name__ == "__main__":
