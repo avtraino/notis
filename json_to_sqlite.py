@@ -1,4 +1,4 @@
-import sqlite3, json, requests
+import sqlite3, json, httpx
 import secrets
 
 conn = sqlite3.connect('data/notis.db')
@@ -29,7 +29,7 @@ def update_breweries():
     for beer in beers:
         bid = beer
         endpoint = f'https://api.untappd.com/v4/beer/info/{bid}?access_token={secrets.untappd_token}'
-        res = requests.get(endpoint)
+        res = httpx.get(endpoint)
         block = res.json()
         brewery = block['response']['beer']['brewery']['brewery_name']
         print(bid, brewery)
