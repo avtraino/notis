@@ -60,7 +60,7 @@ def alvan_recipes():
     cursor.executemany("DELETE FROM SITE_DIFF_recipes WHERE name = (?) ", remove_recipes)
 
     if send_trigger == True:
-        send_email(subject, body)  
+        send_email(subject, body, secrets.site_diff_to)  
         logging.info("alvan_recipes() - recipes updated, sending email")        
     else:
         logging.info("alvan_recipes() - no recipe changes")

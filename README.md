@@ -16,7 +16,7 @@ logpath = '/path/to/logs/'
 
 noti_from = 'from-email-address'
 noti_pass = 'from-email-password'
-noti_to = 'to-email-address'
+noti_default_to = 'to-email-address'
 
 clima_key = 'climacell-api-key'
 
