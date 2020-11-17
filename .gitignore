@@ -8,7 +8,11 @@ secrets.py
 # don't want to deal with it right now
 cw_check.py
 
-# Annoying
+
+# Annoying but helpful
+__pycache__
+
+# Annoying and not needed
 .DS_Store
 .DS_Store?
 ._*
