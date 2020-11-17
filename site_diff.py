@@ -74,7 +74,6 @@ def main():
         alvan_recipes()
     except httpx.ConnectError: 
         logging.error("httpx could not connect to alvannatta.com")
-        send_email("Notis logs: site_diff didn't run properly")
     except:
         logging.exception("alvan_recipes() function did not run properly")
         send_email("Notis logs: site_diff didn't run properly")
