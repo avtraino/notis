@@ -7,6 +7,7 @@ secrets.py
 
 # don't want to deal with it right now
 cw_check.py
+word_guess_scores.py
 
 
 # Annoying but helpful
