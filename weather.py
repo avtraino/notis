@@ -28,6 +28,7 @@ def heavy_rain():
         probability = hour['precipitation_probability']['value']
         code = hour['weather_code']['value']
         precip = round(hour['precipitation']['value'],1)
+        print(f"nice_time: {nice_time} -- code: {code} -- precip: {precip} mm/hr -- prob: {probability}% chance")
         if (probability >= 25) and (code in bad_codes): 
             local_stamp = datetime.strptime(utc_string, '%Y-%m-%dT%H:%M:%S.000Z').replace(tzinfo=timezone.utc).astimezone(tz=None)
             nice_time = local_stamp.strftime("%I%p")
