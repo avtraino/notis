@@ -1,5 +1,5 @@
 import httpx, json
-import logging
+import logging, traceback
 import secrets
 from notify import send_email
 
@@ -42,8 +42,9 @@ def main():
     try:
         commute()
     except:
+        tb = traceback.format_exc()
         logging.exception("Morning commute() function did not run properly")
-        send_email("Notis logs: traffic_morning.py didn't run properly")
+        send_email("Notis logs: traffic_morning.py didn't run properly", tb)
 
 if __name__ == "__main__":
     main()

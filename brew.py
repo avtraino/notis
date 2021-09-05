@@ -1,5 +1,5 @@
 import httpx, json, sqlite3
-import logging, os
+import logging, os, traceback
 import secrets
 from notify import send_email
 
@@ -80,8 +80,9 @@ def main():
     try:
         top_rated()
     except:
+        tb = traceback.format_exc()
         logging.exception("top_rated() function did not run properly")
-        send_email("Notis logs: brew.py didn't run properly")
+        send_email("Notis logs: brew.py didn't run properly", tb)
     
 def debug():
     pass

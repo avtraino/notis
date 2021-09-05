@@ -1,6 +1,6 @@
 import httpx, json, sqlite3
 from bs4 import BeautifulSoup
-import logging, os
+import logging, os, traceback
 import secrets
 from notify import send_email
 
@@ -77,8 +77,9 @@ def main():
     except httpx.ConnectTimeout: 
         logging.error("httpx timeout reached trying alvannatta.com")
     except:
+        tb = traceback.format_exc()
         logging.exception("alvan_recipes() function did not run properly")
-        send_email("Notis logs: site_diff didn't run properly")
+        send_email("Notis logs: site_diff didn't run properly", tb)
     
 def debug():
     pass

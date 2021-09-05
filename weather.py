@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta, timezone
 import httpx, json
-import logging
+import logging, traceback
 import secrets
 from notify import send_email
 
@@ -48,8 +48,9 @@ def main():
     try:
         heavy_rain()
     except:
+        tb = traceback.format_exc()
         logging.exception("heavy_rain() function did not run properly")
-        send_email("Notis logs: weather.py didn't run properly")
+        send_email("Notis logs: weather.py didn't run properly", tb)
 
 if __name__ == "__main__":
     main()
