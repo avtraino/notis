@@ -7,6 +7,8 @@ def prod_only(func):
     def wrapper(*args, **kwargs):
         if '-gcp-' in platform.platform():
             func(*args, **kwargs)
+        else:
+            print("not in Prod, suppressing email")
     return wrapper
 
 @prod_only
