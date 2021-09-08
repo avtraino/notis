@@ -1,7 +1,7 @@
 import smtplib, platform
 from email.message import EmailMessage
 from secrets import noti_from, noti_pass, noti_default_to
-import sys, argparse
+import argparse
 
 def prod_only(func):
     def wrapper(*args, **kwargs):
@@ -27,12 +27,11 @@ def send_email(subject, body=" ", send_to=noti_default_to):
 
 if __name__ == "__main__":
 
-    parser=argparse.ArgumentParser()
-    parser.add_argument('--subject')
-    parser.add_argument('--body')
-    args=parser.parse_args()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--subject', required=True)
+    parser.add_argument('--body', default="")
+    parser.add_argument('--to', dest='send_to', default=noti_default_to)
 
-    subject = args.subject
-    body = args.body
+    args = parser.parse_args()
 
-    send_email(subject, body)
+    send_email(args.subject, args.body, args.send_to)
