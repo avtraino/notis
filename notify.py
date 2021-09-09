@@ -12,13 +12,13 @@ def prod_only(func):
     return wrapper
 
 @prod_only
-def send_email(subject="(no subject)", body=" ", send_to=noti_default_to, content_type="text"):
+def send_email(subject="(no subject)", body=" ", send_to=noti_default_to, content_type="text/plain"):
     msg = EmailMessage()
     msg['Subject'] = subject
     msg['From'] = "Notis <"+noti_from+">"
     msg['To'] = send_to
 
-    if content_type == "html":
+    if content_type == "text/html":
         msg.add_header('Content-Type','text/html')
         msg.set_payload(body)
     else:
