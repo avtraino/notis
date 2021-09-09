@@ -12,12 +12,17 @@ def prod_only(func):
     return wrapper
 
 @prod_only
-def send_email(subject, body=" ", send_to=noti_default_to):
+def send_email(subject="(no subject)", body=" ", send_to=noti_default_to, content_type="text"):
     msg = EmailMessage()
     msg['Subject'] = subject
     msg['From'] = "Notis <"+noti_from+">"
     msg['To'] = send_to
-    msg.set_content(body)
+
+    if content_type == "html":
+        msg.add_header('Content-Type','text/html')
+        msg.set_payload(body)
+    else:
+        msg.set_content(body)
 
     server = smtplib.SMTP_SSL('smtp.gmail.com')
     server.login( noti_from, noti_pass )
@@ -28,10 +33,10 @@ def send_email(subject, body=" ", send_to=noti_default_to):
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('--subject', required=True)
-    parser.add_argument('--body', default="")
-    parser.add_argument('--to', dest='send_to', default=noti_default_to)
-
+    parser.add_argument('--subject')
+    parser.add_argument('--body')
+    parser.add_argument('--to', dest='send_to')
+    parser.add_argument('--content-type')
     args = parser.parse_args()
 
-    send_email(args.subject, args.body, args.send_to)
+    send_email(args.subject, args.body, args.send_to, args.content_type)
