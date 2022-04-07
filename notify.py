@@ -12,7 +12,7 @@ def prod_only(func):
     return wrapper
 
 @prod_only
-def send_email(subject, body, send_to, content_type):
+def send_email(subject="(no subject)", body=" ", send_to=noti_default_to, content_type="text/plain"):
     msg = EmailMessage()
     msg['Subject'] = subject
     msg['From'] = "Notis <"+noti_from+">"
@@ -39,8 +39,4 @@ if __name__ == "__main__":
     parser.add_argument('--content-type')
     args = parser.parse_args()
 
-    send_email(
-        args.subject or "(no subject)", 
-        args.body or " ", 
-        args.send_to or noti_default_to, 
-        args.content_type or "text/plain")
+    send_email(args.subject, args.body, args.send_to, args.content_type)
