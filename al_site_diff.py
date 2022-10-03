@@ -23,7 +23,7 @@ def alvan_recipes():
     """
 
     subject = "Site diff: Al's recipes"
-    body = "Changes to alvannatta.com/recipes:\n"
+    body = "<h1>New recipes from alvannatta.com</h1><br>"
     send_trigger = False
 
     cursor = conn.cursor()
@@ -40,14 +40,14 @@ def alvan_recipes():
     for recipe in json:
         if recipe['private'] == 1:
             continue
-        recipe_dict = {"recipe_num" : recipe['recipe_num'], "recipe_name" : recipe['recipe_name']}
+        recipe_dict = {"recipe_num" : recipe['recipe_num'], "recipe_name" : recipe['recipe_name'], "recipe_href" : recipe['recipe_href'], "image_src" : recipe['image_src']}
         site_recipes.append(recipe_dict)
 
     add_recipes = []
     for site_recipe in site_recipes:
         if site_recipe['recipe_num'] not in [x['recipe_num'] for x in db_recipes]:
             send_trigger = True
-            body = body + f"Added: {site_recipe['recipe_name']} \n"
+            body = body + f"""<h2>{site_recipe['recipe_name']} <a href="https://alvannatta.com/recipes/{site_recipe['recipe_href']}">(link)</a> </h2> <img src="https://alvannatta.com/recipe-images/{site_recipe['image_src']}" width="500" height="600">  <br><br>"""
             add_recipes.append((site_recipe['recipe_num'], site_recipe['recipe_name']))
 
     remove_recipes = []
@@ -57,11 +57,11 @@ def alvan_recipes():
             body = body + f"Removed: {db_recipe['recipe_name']} \n"
             remove_recipes.append((db_recipe['recipe_num'],))
 
-    cursor.executemany("INSERT INTO SITE_DIFF_recipes (recipe_num, recipe_name, date_added) VALUES (?, ?, datetime('now', 'localtime'))", add_recipes)
+    # cursor.executemany("INSERT INTO SITE_DIFF_recipes (recipe_num, recipe_name, date_added) VALUES (?, ?, datetime('now', 'localtime'))", add_recipes)
     cursor.executemany("DELETE FROM SITE_DIFF_recipes WHERE recipe_num = (?) ", remove_recipes)
 
     if send_trigger == True:
-        send_email(subject, body, secrets.site_diff_to)  
+        send_email(subject, body, send_to=secrets.site_diff_to, content_type="text/html")  
         logging.info("alvan_recipes() - recipes updated, sending email")        
     else:
         logging.info("alvan_recipes() - no recipe changes")
