@@ -57,7 +57,7 @@ def alvan_recipes():
             body = body + f"Removed: {db_recipe['recipe_name']} \n"
             remove_recipes.append((db_recipe['recipe_num'],))
 
-    # cursor.executemany("INSERT INTO SITE_DIFF_recipes (recipe_num, recipe_name, date_added) VALUES (?, ?, datetime('now', 'localtime'))", add_recipes)
+    cursor.executemany("INSERT INTO SITE_DIFF_recipes (recipe_num, recipe_name, date_added) VALUES (?, ?, datetime('now', 'localtime'))", add_recipes)
     cursor.executemany("DELETE FROM SITE_DIFF_recipes WHERE recipe_num = (?) ", remove_recipes)
 
     if send_trigger == True:
