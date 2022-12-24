@@ -20,7 +20,7 @@ def send_email(subject="(no subject)", body=" ", send_to=noti_default_to, conten
 
     if content_type == "text/html":
         msg.add_header('Content-Type','text/html')
-        msg.set_payload(body)
+        msg.set_payload(body.encode("utf8"))
     else:
         msg.set_content(body)
 
