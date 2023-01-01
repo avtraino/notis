@@ -47,7 +47,7 @@ def alvan_recipes():
     for site_recipe in site_recipes:
         if site_recipe['recipe_num'] not in [x['recipe_num'] for x in db_recipes]:
             send_trigger = True
-            body = body + f"""<h2>{site_recipe['recipe_name']} <a href="https://alvannatta.com/recipes/{site_recipe['recipe_href']}">(link)</a> </h2> <img src="https://alvannatta.com/recipe-images/{site_recipe['image_src']}" width="500" height="600">  <br><br>"""
+            body = body + f"""<h2>{site_recipe['recipe_name']} <a href="https://alvannatta.com/recipes/{site_recipe['recipe_href']}">(link)</a> </h2> <img src="https://alvannatta.com/recipe-images/{site_recipe['image_src']}" height="500">  <br><br>"""
             add_recipes.append((site_recipe['recipe_num'], site_recipe['recipe_name']))
 
     remove_recipes = []
