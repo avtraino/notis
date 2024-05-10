@@ -28,7 +28,7 @@ def commute():
         tups.append(tup)
 
     best_route = min(tups)[1]
-    traffic = not all(any(string in step for step in best_route) for string in ['I-64 E', 'I-195 S', 'N Hamilton'])
+    traffic = not all(any(string in step for step in best_route) for string in ['I-64 E', 'I-195 S'])
 
     if traffic:
         subject = "Traffic Alert"
