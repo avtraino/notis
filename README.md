@@ -6,7 +6,7 @@
 * in the morning if traffic is bad enough to take a different route to work
 * in the evening if traffic is bad enough to take a different route home
 * Friday afternoon with any new beers my friends really enjoyed in the last week
-* any time Al adds a new recipe to his site
+* any time Alvan adds a new recipe to his site
 
 ## Requirements:
 
